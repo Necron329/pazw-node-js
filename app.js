@@ -14,10 +14,10 @@ connection.connect((err) => {
     }
     console.log('Connected to MariaDB as id ' + connection.threadId);
 
+});
 
 
-
-    const createTableQuery = `
+const createTableQuery = `
         CREATE TABLE IF NOT EXISTS names (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
@@ -25,45 +25,42 @@ connection.connect((err) => {
         )
     `;
 
-    connection.query(createTableQuery, (err, results) => {
-        if (err) {
-            console.error('Error creating table:', err);
-            return;
-        }
-        console.log('Table created or already exists.');
-
-
-
-
-        const insertValuesQuery = `
-            INSERT INTO names (name, last_name) VALUES
-            ('imie','nazwisko')
-        `;
-
-        connection.query(insertValuesQuery, (err, results) => {
-            if (err) {
-                console.error('Error inserting values:', err);
-                return;
-            }
-            console.log('Values inserted:', results.affectedRows);
-
-
-
-
-
-            const selectQuery = 'SELECT * FROM names';
-            connection.query(selectQuery, (err, results) => {
-                if (err) {
-                    console.error('Error selecting values:', err);
-                    return;
-                }
-                console.log('All records:', results);
-
-
-
-
-                connection.end();
-            });
-        });
-    });
+connection.query(createTableQuery, (err, results) => {
+    if (err) {
+        console.error('Error creating table:', err);
+        return;
+    }
+    console.log('Table created or already exists.');
 });
+
+
+
+// const insertValuesQuery = `
+//             INSERT INTO names (name, last_name) VALUES
+//             ('imie','nazwisko')
+//         `;
+
+// connection.query(insertValuesQuery, (err, results) => {
+//     if (err) {
+//         console.error('Error inserting values:', err);
+//         return;
+//     }
+//     console.log('Values inserted:', results.affectedRows);
+// });
+
+
+
+
+const selectQuery = 'SELECT * FROM names';
+connection.query(selectQuery, (err, results) => {
+    if (err) {
+        console.error('Error selecting values:', err);
+        return;
+    }
+    console.log('All records:', results);
+
+});
+
+
+connection.end();
+
