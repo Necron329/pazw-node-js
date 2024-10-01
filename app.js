@@ -22,8 +22,7 @@ const createTableQuery = `
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             last_name VARCHAR(255) NOT NULL
-        )
-    `;
+        )`;
 
 connection.query(createTableQuery, (err, results) => {
     if (err) {
